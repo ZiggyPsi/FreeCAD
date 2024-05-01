@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   id="svg2"
+   height="64"
+   width="64"
+   version="1.1"
+   viewBox="0 0 63.999999 63.999999"
+   sodipodi:docname="NavigationDelcam_dark.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="16"
+     inkscape:cx="38.53125"
+     inkscape:cy="36.875"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="translate(0,-988.36)"
+     stroke="#2e3436"
+     stroke-width="6"
+     fill="none"
+     inkscape:label="layer1">
+    <path
+       id="path4144"
+       d="m16 1028.4v-20c0-8 4-12 16-12s16 4 16 12v20c0 8-4 17-16 17s-16-9-16-17z" />
+    <path
+       id="path4209"
+       d="m32 1004.4v12"
+       inkscape:label="path4209" />
+    <path
+       style="display:inline;fill:#2e3436;fill-opacity:1;stroke-width:0.0784086"
+       d="m 30.922644,1031.9197 c -1.678661,-0.5367 -2.795925,-2.3243 -2.497237,-3.9957 0.319324,-1.7868 1.806471,-3.0657 3.564959,-3.0657 1.781297,0 3.262428,1.267 3.583879,3.0657 0.301087,1.6848 -0.825834,3.4711 -2.523035,3.9994 -0.614155,0.1911 -1.523981,0.1895 -2.128566,0 z"
+       id="path506" />
+  </g>
+</svg>

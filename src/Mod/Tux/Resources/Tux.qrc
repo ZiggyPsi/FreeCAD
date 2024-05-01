@@ -26,6 +26,7 @@
         <file>icons/Navigation_Mouse_ShiftLeft.svg</file>
         <file>icons/Navigation_Mouse_ShiftMiddle.svg</file>
         <file>icons/Navigation_Mouse_ShiftMove.svg</file>
+        <file>icons/Navigation_Mouse_ShiftOrCtrlLeft.svg</file>
         <file>icons/Navigation_Touchpad_AltTouch.svg</file>
         <file>icons/Navigation_Touchpad_Left.svg</file>
         <file>icons/Navigation_Touchpad_ShiftCtrlTouch.svg</file>
@@ -51,6 +52,8 @@
         <file>icons/NavigationTinkerCAD_dark.svg</file>
         <file>icons/NavigationTouchpad_light.svg</file>
         <file>icons/NavigationTouchpad_dark.svg</file>
+        <file>icons/NavigationDelcam_light.svg</file>
+        <file>icons/NavigationDelcam_dark.svg</file>
         <file>icons/NavigationUndefined.svg</file>
         <file>translations/Tux_af.qm</file>
         <file>translations/Tux_zh-CN.qm</file>

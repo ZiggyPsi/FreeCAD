@@ -454,6 +454,20 @@ protected:
     SbBool processSoEvent(const SoEvent * const ev) override;
 };
 
+class GuiExport DelcamNavigationStyle : public UserNavigationStyle {
+    using inherited = UserNavigationStyle;
+
+    TYPESYSTEM_HEADER_WITH_OVERRIDE();
+
+public:
+    DelcamNavigationStyle();
+    ~DelcamNavigationStyle() override;
+    const char* mouseButtons(ViewerMode) override;
+
+protected:
+    SbBool processSoEvent(const SoEvent * const ev) override;
+};
+
 } // namespace Gui
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Gui::NavigationStyle::RotationCenterModes)
