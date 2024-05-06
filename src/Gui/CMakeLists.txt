@@ -1218,7 +1218,6 @@ SET(FreeCADGui_CPP_SRCS
     ManualAlignment.cpp
     StartupProcess.cpp
     TransactionObject.cpp
-    UserSettings.cpp
 )
 SET(FreeCADGui_SRCS
     Application.h
@@ -1256,7 +1255,6 @@ SET(FreeCADGui_SRCS
     ManualAlignment.h
     StartupProcess.h
     TransactionObject.h
-    UserSettings.h
     ${FreeCADGui_SDK_MOC_HDRS}
 )
 
