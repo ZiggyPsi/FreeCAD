@@ -297,7 +297,7 @@ def getGlobalPlacement(targetObj, container=None):
         return App.Placement()
 
     inContainerBranch = container is None
-    for rootObj in App.activeDocument().RootObjects:
+    for rootObj in App.activeDocument().RootObjectsIgnoreLinks:
         foundPlacement = getTargetPlacementRelativeTo(
             targetObj, rootObj, container, inContainerBranch
         )
@@ -308,7 +308,7 @@ def getGlobalPlacement(targetObj, container=None):
 
 
 def isThereOneRootAssembly():
-    for part in App.activeDocument().RootObjects:
+    for part in App.activeDocument().RootObjectsIgnoreLinks:
         if part.TypeId == "Assembly::AssemblyObject":
             return True
     return False
@@ -921,13 +921,15 @@ def findPlacement(obj, part, elt, vtx, ignoreVertex=False):
 
         # First we find the translation
         if vtx_type == "Face" or ignoreVertex:
-            if surface.TypeId == "Part::GeomCylinder" or surface.TypeId == "Part::GeomCone":
+            if surface.TypeId == "Part::GeomCylinder":
                 centerOfG = face.CenterOfGravity - surface.Center
                 centerPoint = surface.Center + centerOfG
                 centerPoint = centerPoint + App.Vector().projectToLine(centerOfG, surface.Axis)
                 plc.Base = centerPoint
             elif surface.TypeId == "Part::GeomTorus" or surface.TypeId == "Part::GeomSphere":
                 plc.Base = surface.Center
+            elif surface.TypeId == "Part::GeomCone":
+                plc.Base = surface.Apex
             else:
                 plc.Base = face.CenterOfGravity
         elif vtx_type == "Edge":

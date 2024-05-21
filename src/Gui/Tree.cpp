@@ -223,6 +223,7 @@ public:
     Connection connectIcon;
     Connection connectTool;
     Connection connectStat;
+    Connection connectHl;
 
     DocumentObjectData(DocumentItem* docItem, ViewProviderDocumentObject* vpd)
         : docItem(docItem)
@@ -236,6 +237,8 @@ public:
             std::bind(&DocumentObjectData::slotChangeToolTip, this, sp::_1));
         connectStat = viewObject->signalChangeStatusTip.connect(
             std::bind(&DocumentObjectData::slotChangeStatusTip, this, sp::_1));
+        connectHl = viewObject->signalChangeHighlight.connect(
+            std::bind(&DocumentObjectData::slotChangeHighlight, this, sp::_1, sp::_2));
         //NOLINTEND
 
         removeChildrenFromRoot = viewObject->canRemoveChildrenFromRoot();
@@ -358,6 +361,11 @@ public:
     void slotChangeStatusTip(const QString& tip) {
         for (auto item : items)
             item->setStatusTip(0, tip);
+    }
+
+    void slotChangeHighlight(bool set, Gui::HighlightMode mode) {
+        for (auto item : items)
+            item->setHighlight(set, mode);
     }
 };
 
@@ -2654,7 +2662,7 @@ void TreeWidget::sortDroppedObjects(TargetItemInfo& targetInfo, std::vector<App:
         propGroup->setValue(sortedObjList);
     }
     else if (targetInfo.targetItem->type() == TreeWidget::DocumentType) {
-        objList = targetInfo.targetDoc->getRootObjects();
+        objList = targetInfo.targetDoc->getRootObjectsIgnoreLinks();
         // First we need to sort objList by treeRank.
         std::sort(objList.begin(), objList.end(),
             [](App::DocumentObject* a, App::DocumentObject* b) {
@@ -5279,14 +5287,18 @@ void DocumentObjectItem::testStatus(bool resetStatus, QIcon& icon1, QIcon& icon2
         // to black which will lead to unreadable text if the system background
         // hss already a dark color.
         // However, it works if we set the appropriate role to an empty QVariant().
-        this->setData(0, Qt::ForegroundRole, QVariant());
+        for (int column = 0; column < this->columnCount(); ++column) {
+            this->setData(column, Qt::ForegroundRole, QVariant());
+        }
     }
     else { // invisible
         QStyleOptionViewItem opt;
         // it can happen that a tree item is not attached to the tree widget (#0003025)
         if (this->treeWidget())
             opt.initFrom(this->treeWidget());
-        this->setForeground(0, opt.palette.color(QPalette::Disabled, QPalette::Text));
+        for (int column = 0; column < this->columnCount(); ++column) {
+            this->setForeground(column, opt.palette.color(QPalette::Disabled, QPalette::Text));
+        }
         mode = QIcon::Disabled;
     }
 

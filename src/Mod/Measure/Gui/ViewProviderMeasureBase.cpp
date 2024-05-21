@@ -41,6 +41,7 @@
 
 #include <App/DocumentObject.h>
 #include <Base/Console.h>
+#include <Gui/BitmapFactory.h>
 #include <Gui/Document.h>
 #include <Gui/ViewParams.h>
 #include <Gui/Inventor/MarkerBitmaps.h>
@@ -50,9 +51,23 @@
 #include <Mod/Measure/App/Preferences.h>
 #include "ViewProviderMeasureBase.h"
 
-
 using namespace MeasureGui;
 using namespace Measure;
+
+
+PROPERTY_SOURCE(MeasureGui::ViewProviderMeasureGroup, Gui::ViewProviderDocumentObjectGroup)
+
+ViewProviderMeasureGroup::ViewProviderMeasureGroup()
+{}
+
+ViewProviderMeasureGroup::~ViewProviderMeasureGroup() = default;
+
+QIcon ViewProviderMeasureGroup::getIcon() const
+{
+    return Gui::BitmapFactory().pixmap("Measurement-Group.svg");
+}
+
+
 
 //NOLINTBEGIN
 PROPERTY_SOURCE(MeasureGui::ViewProviderMeasureBase, Gui::ViewProviderDocumentObject)
@@ -268,7 +283,11 @@ void ViewProviderMeasureBase::positionAnno(const Measure::MeasureBase* measureOb
 void ViewProviderMeasureBase::attach(App::DocumentObject *pcObj)
 {
     ViewProviderDocumentObject::attach(pcObj);
-    positionAnno(static_cast<MeasureBase*>(pcObj));
+    auto measureObj = static_cast<MeasureBase*>(pcObj);
+    positionAnno(measureObj);
+
+    // Set the icon
+    pLabel->setIcon(Gui::BitmapFactory().pixmapFromSvg(sPixmap, QSize(20, 20)));
 }
 
 
@@ -280,6 +299,10 @@ void ViewProviderMeasureBase::updateData(const App::Property* prop)
     auto obj = getMeasureObject();
     if (!obj) {
         return;
+    }
+
+    if (strcmp(prop->getName(), "Label") == 0) {
+        doUpdate = true;
     }
 
     // Check if one of the input properties has been changed
@@ -299,6 +322,11 @@ void ViewProviderMeasureBase::updateData(const App::Property* prop)
 
     if (doUpdate) {
         redrawAnnotation();
+
+        // Update label
+        std::string userLabel(obj->Label.getValue());
+        std::string name = userLabel.substr(0, userLabel.find(":"));
+        obj->Label.setValue((name + ": ") + obj->getResultString().toStdString());
     }
 
     ViewProviderDocumentObject::updateData(prop);
@@ -595,3 +623,9 @@ void ViewProviderMeasureBase::show()
         ViewProviderDocumentObject::show();
     }
 }
+
+
+PROPERTY_SOURCE(MeasureGui::ViewProviderMeasureArea, MeasureGui::ViewProviderMeasure)
+PROPERTY_SOURCE(MeasureGui::ViewProviderMeasureLength, MeasureGui::ViewProviderMeasure)
+PROPERTY_SOURCE(MeasureGui::ViewProviderMeasurePosition, MeasureGui::ViewProviderMeasure)
+PROPERTY_SOURCE(MeasureGui::ViewProviderMeasureRadius, MeasureGui::ViewProviderMeasure)
